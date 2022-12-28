@@ -1,3 +1,8 @@
 # text analyzer
 
-Ahoj first python project
+first python project:
+text analyzer
+
+used libraries: re
+
+dev. tool: Visual Studio Code

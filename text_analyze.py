@@ -5,6 +5,9 @@ email: mann.m@seznam.cz
 discord: 
 """
 
+# import library for regex
+import re
+
 #   variable with text for analysis, options for text 1-3
 
 TEXTS = ['''
@@ -34,3 +37,16 @@ other freshwater genera and herring similar to those
 in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
+
+# registered users for text analyzer
+
+registered = {"hugo" : "ptak1258", "robert" : "horky789"}
+
+# print(registered)
+
+# user credentials for verification - input
+user_name = input()
+user_passwd = input()
+
+# user choice for text analysis - input
+text_option = input("Prosím vyberte text - zadejte číslo textu mezi 1-3: ")

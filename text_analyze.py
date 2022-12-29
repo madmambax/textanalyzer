@@ -2,7 +2,7 @@
 text_analyze.py: First project to Engeto Online Python Academy
 author: Martin Mannsbarth
 email: mann.m@seznam.cz
-discord: 
+discord: Martin M.#4226
 """
 
 # import library for regex
@@ -40,13 +40,30 @@ garpike and stingray are also present.'''
 
 # registered users for text analyzer
 
-registered = {"hugo" : "ptak1258", "robert" : "horky789"}
+registered = {"bob" : "123", "ann" : "pass123", "mike" : "password123", "liz" : "pas123"}
 
 # print(registered)
-
+# app start info
+print("""
+Dobrý den, právě jste spustili textový analyzátor,
+pro použití je nutné se autorizovat.
+""")
 # user credentials for verification - input
-user_name = input()
-user_passwd = input()
+user_name = input("Zadejte prosím své uživatelské jméno: ")
+user_passwd = input("Zadejte prosím své heslo: ")
+
+# user verification
+if registered.get(user_name) == user_passwd:
+    print(f"Vítejte uživateli {user_name} v aplikaci textového analyzátoru")
+else:
+    print("Neověřený uživatel, ukončuji aplikaci ...")
+    quit()
 
 # user choice for text analysis - input
 text_option = input("Prosím vyberte text - zadejte číslo textu mezi 1-3: ")
+
+if text_option.isdigit() and 1 <= int(text_option) <= 3:
+    print("ok")
+else:
+    print("Špatná volba, ukončuji ...")
+    quit()

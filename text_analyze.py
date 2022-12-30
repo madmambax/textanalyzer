@@ -8,7 +8,7 @@ discord: Martin M.#4226
 # import library for regex
 import re
 
-#   variable with text for analysis, options for text 1-3
+# variable with text for analysis, options for text 1-3
 
 TEXTS = ['''
 Situated about 10 miles west of Kemmerer,
@@ -63,7 +63,10 @@ else:
 text_option = input("Prosím vyberte text - zadejte číslo textu mezi 1-3: ")
 
 if text_option.isdigit() and 1 <= int(text_option) <= 3:
-    print("ok")
+    text_opt = int(text_option) - 1
+# show text according user choice
+    print("Zvolili jste k analýze tento text: ")
+    print(TEXTS[text_opt])
 else:
     print("Špatná volba, ukončuji ...")
     quit()

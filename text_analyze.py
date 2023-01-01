@@ -72,7 +72,7 @@ else:
 # user choice for text analysis - input
 
 text_option = input("Please, choose the text - insert number from the range 1-3: ")
-print(delimiter)
+# print(delimiter)
 if text_option.isdigit() and 1 <= int(text_option) <= 3:
     text_opt = int(text_option) - 1
       
@@ -108,7 +108,29 @@ if text_option.isdigit() and 1 <= int(text_option) <= 3:
 # count lower case words
     words_lowercase = len(re.findall(r'\b[a-z]+\b', TEXTS[text_opt]))
     print("Number of lowercase words:", words_lowercase )  
-    print(delimiter)    
+    print(delimiter)  
+    
+# word length frequency and simple graph
+    graph = "*"
+    frequence = []
+    words_frequence = re.findall(r'\w+', TEXTS[text_opt])
+   
+    for word in words_frequence:
+        frequence.append(len(word))
+     
+    occured = {}
+    for item in frequence:
+        if item in occured:
+            occured[item] = occured.get(item)+1
+        else:
+            occured[item] = 1
+
+    
+    print(f"{'LEN |':^4}{'OCCURENCIES':^17}{'|NR.':^9}")
+    print(delimiter)
+    for k,v in sorted(occured.items()):
+    		print(f"{str(k) : ^4}{('|' + graph * v ).ljust(16): ^17}{'|' + str(v) : ^9}")
+      
 else:
     print("Incorrect option, terminating ...")
     quit()

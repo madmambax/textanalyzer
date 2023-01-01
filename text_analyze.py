@@ -1,5 +1,6 @@
 """"
 text_analyze.py: First project to Engeto Online Python Academy
+
 author: Martin Mannsbarth
 email: mann.m@seznam.cz
 discord: Martin M.#4226
@@ -38,35 +39,76 @@ in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
 
+# delimeter
+delimiter = "-" * 64
+
 # registered users for text analyzer
 
 registered = {"bob" : "123", "ann" : "pass123", "mike" : "password123", "liz" : "pas123"}
 
 # print(registered)
 # app start info
+
 print("""
-Dobrý den, právě jste spustili textový analyzátor,
-pro použití je nutné se autorizovat.
+Hello, you have just launched the text analyzer,
+authorization is required for use.
 """)
+
 # user credentials for verification - input
-user_name = input("Zadejte prosím své uživatelské jméno: ")
-user_passwd = input("Zadejte prosím své heslo: ")
+
+user_name = input("Please, insert your name: ")
+user_passwd = input("Please, insert your password: ")
 
 # user verification
+
 if registered.get(user_name) == user_passwd:
-    print(f"Vítejte uživateli {user_name} v aplikaci textového analyzátoru")
+    print(delimiter)
+    print(f"Welcome user {user_name} in the application text analyzer.\nWe have 3 texts to be analyzed. ")
+    print(delimiter)
 else:
-    print("Neověřený uživatel, ukončuji aplikaci ...")
+    print("Unregistered user, terminating the program...")
     quit()
 
 # user choice for text analysis - input
-text_option = input("Prosím vyberte text - zadejte číslo textu mezi 1-3: ")
 
+text_option = input("Please, choose the text - insert number from the range 1-3: ")
+print(delimiter)
 if text_option.isdigit() and 1 <= int(text_option) <= 3:
     text_opt = int(text_option) - 1
+      
 # show text according user choice
-    print("Zvolili jste k analýze tento text: ")
-    print(TEXTS[text_opt])
+
+    print("You choose this text for analysis: ")
+    print(TEXTS[text_opt],"\n")
+    print(delimiter)
+# count and print the number of words in the text
+# words = re.findall(r'\w+', TEXTS[text_opt])
+
+    words_count = len(re.findall(r'\w+', TEXTS[text_opt]))
+    print(f"Number of words: {words_count}")
+    
+# count numerics kind of words and numerics sum
+    words_numerics = len(re.findall(r'\b\d+\b', TEXTS[text_opt]))
+    numerics = re.findall(r'\b\d+\b', TEXTS[text_opt])
+    sum = 0
+    for num in numerics:
+        sum += int(num)
+        
+    print("Number of numerics:", words_numerics)
+    print("Summary for numerics strings", sum)
+    
+# count title words
+    words_title = len(re.findall(r'\b[A-Z]{1}[a-z]+\b', TEXTS[text_opt]))
+    print("Number of title words:", words_title)
+    
+# count upper case words
+    words_uppercase = len(re.findall(r'\b[A-Z]+[A-Z]+\b', TEXTS[text_opt]))
+    print("Number of uppercase words:", words_uppercase)
+    
+# count lower case words
+    words_lowercase = len(re.findall(r'\b[a-z]+\b', TEXTS[text_opt]))
+    print("Number of lowercase words:", words_lowercase )  
+    print(delimiter)    
 else:
-    print("Špatná volba, ukončuji ...")
+    print("Incorrect option, terminating ...")
     quit()

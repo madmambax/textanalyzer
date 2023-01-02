@@ -43,19 +43,15 @@ garpike and stingray are also present.'''
 delimiter = "-" * 64
 
 # registered users for text analyzer
-
 registered = {"bob" : "123", "ann" : "pass123", "mike" : "password123", "liz" : "pas123"}
 
-# print(registered)
 # app start info
-
 print("""
 Hello, you have just launched the text analyzer,
 authorization is required for use.
 """)
 
 # user credentials for verification - input
-
 user_name = input("Please, insert your name: ")
 user_passwd = input("Please, insert your password: ")
 
@@ -70,22 +66,21 @@ else:
     quit()
 
 # user choice for text analysis - input
-
 text_option = input("Please, choose the text - insert number from the range 1-3: ")
-# print(delimiter)
+print(delimiter, "\n")
+
 if text_option.isdigit() and 1 <= int(text_option) <= 3:
     text_opt = int(text_option) - 1
       
 # show text according user choice
-
     print("You choose this text for analysis: ")
     print(TEXTS[text_opt],"\n")
     print(delimiter)
+    
 # count and print the number of words in the text
 # words = re.findall(r'\w+', TEXTS[text_opt])
-
     words_count = len(re.findall(r'\w+', TEXTS[text_opt]))
-    print(f"Number of words: {words_count}")
+    print("Number of words:", words_count)
     
 # count numerics kind of words and numerics sum
     words_numerics = len(re.findall(r'\b\d+\b', TEXTS[text_opt]))
@@ -95,7 +90,7 @@ if text_option.isdigit() and 1 <= int(text_option) <= 3:
         sum += int(num)
         
     print("Number of numerics:", words_numerics)
-    print("Summary for numerics strings", sum)
+    print("Summary for numerics strings:", sum)
     
 # count title words
     words_title = len(re.findall(r'\b[A-Z]{1}[a-z]+\b', TEXTS[text_opt]))
@@ -108,7 +103,21 @@ if text_option.isdigit() and 1 <= int(text_option) <= 3:
 # count lower case words
     words_lowercase = len(re.findall(r'\b[a-z]+\b', TEXTS[text_opt]))
     print("Number of lowercase words:", words_lowercase )  
-    print(delimiter)  
+     
+
+# special word- serial code - mix number and uppercase letter
+    words_special = re.findall(r'(?!(?:[A-Z]+|[0-9]+)\b)[A-Z0-9]+\b', TEXTS[text_opt])
+    words_spec = len(words_special)
+    
+    print("Number of special words - serial code (mix uppercase letters and numerics):", words_spec)
+    
+    if words_spec > 0:
+        print("This special word is:", words_special)
+    else:    
+        print("There is not special word in this text for analysis.")
+        
+    print("\n") 
+    print(delimiter)
     
 # word length frequency and simple graph
     graph = "*"
@@ -126,11 +135,13 @@ if text_option.isdigit() and 1 <= int(text_option) <= 3:
             occured[item] = 1
 
     
-    print(f"{'LEN |':^4}{'OCCURENCIES':^17}{'|NR.':^9}")
+    print(f"{'LEN |':^4}{'OCCURENCIES':^20}{'|NR.':^9}")
     print(delimiter)
     for k,v in sorted(occured.items()):
-    		print(f"{str(k) : ^4}{('|' + graph * v ).ljust(16): ^17}{'|' + str(v) : ^9}")
-      
+        print(f"{str(k) : ^4}{('|' + graph * v ).ljust(19): ^20}{'|' + str(v) : ^9}")
+            
+    print(delimiter, "\n")
+    
 else:
     print("Incorrect option, terminating ...")
     quit()
